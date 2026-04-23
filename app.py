@@ -6,6 +6,10 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 db = SQLAlchemy(app)
 
+@app.before_request
+def create_tables():
+    db.create_all()
+
 fetch_count = 0
 
 # DB Model
